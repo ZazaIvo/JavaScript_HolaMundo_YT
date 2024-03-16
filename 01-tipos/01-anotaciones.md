@@ -596,4 +596,185 @@ Mostrando:
 La longitu del arreglo es: 6
 ```
 
-.
+# Funciones
+
+Se pueden pensar como procedimientos o instrucciones a ejecutar. Que se utilizarán cuando se las llame.
+
+## Sintaxis
+
+Se definen con la palabra reservada de "function" luego el nombre que va a tener, se debe usar por buenas costubres vervos en ifinitivo, como calcular, saludar, cerrar, borrar, etc. Luego se usarán parentesis para indicar que necesita que le pasemos o le entreguemos como argumento. Por ejemplo para cocinar necesitará entre parentecis todos los ingredientes. Luego con llaves vamos a indicar la acción que va a ejecutar.
+
+```javascript
+function saludar() {}
+```
+
+Se puede pensar que sería una variable que realiza acciones.
+
+## Ejecutar función
+
+Si no se llama a la función, nada de código se ejecuta. Por lo que debemos llamarla luego de definirla en otra parte del código. Para ello escribimos el nombre con los parentesis y finalizamos con el punto y coma.
+
+```
+function saludar() {
+  console.log("Hola Mundo");
+}
+saludar(); // LLamado
+```
+
+Ahora cuando ejecutamos una funcion ademas de mostrar un console.log() vamos a querer que nos devuelva algo de todo lo que realizo. Por lo que para ello tenemos la palabra reservada "return". Que será el resultado final de la función. Por lo que se escriba dentro de la función luego de un return no se ejecuta.
+
+```
+function sumar(x, y) {
+  sum = x + y;
+  return sum;
+}
+```
+
+Cuando retorna un valor debemos asignarlo a un contenedor que guarde ese valor. Para ello podemos crear una variable y que esta llame a la funcion:
+
+```javascript
+suma = sumar(x, y);
+```
+
+Lo que hara es llamar a la función de sumar pasandole los valores de x a y. Cuando la función termine devolvera el resultado que se asignará a la variable suma.
+
+## Argumentos
+
+Vimos en la función de sumar que le pasamos valores por x y por y. Estos se denominan como argumentos. Como x e y son variables podemos cambiar sus valores y reutilizar nuevamente la función siendo más flexible.
+
+Vamos a crear las funciones de sumar, restar, multiplicar y dividir. Que las llamaremos y pasaremos los parametros de x e y para realizar los cálculos.
+
+```javascript
+// Variables
+let suma;
+let resta;
+let multi;
+let divicion;
+let x;
+let y;
+let sum;
+let rest;
+let mult;
+let div;
+// Funciones
+function sumar(x, y) {
+  sum = x + y;
+  return sum;
+}
+function restar(x, y) {
+  if (x >= y) {
+    rest = x - y;
+    return rest;
+  } else if (y > x) {
+    rest = y - x;
+  }
+  return rest;
+}
+function multiplicar(x, y) {
+  mult = x * y;
+  return mult;
+}
+function dividir(x, y) {
+  if (x >= y) {
+    div = x / y;
+  } else if (y > x) {
+    div = y / x;
+  }
+  return div;
+}
+// Ejecucion
+x = 10;
+y = 12;
+console.log("Numero1: " + x);
+console.log("Numero2: " + y);
+console.log("Calculos:");
+suma = sumar(x, y);
+resta = restar(x, y);
+multi = multiplicar(x, y);
+divicion = dividir(x, y);
+// Mostrar
+console.log("La suma de " + x + " y " + y + " es: " + suma);
+console.log("La resta de " + x + " y " + y + " es: " + resta);
+console.log("La multiplicacion de " + x + " y " + y + " es: " + multi);
+console.log("La division de " + x + " y " + y + " es: " + divicion);
+```
+
+Lo que nos devuelve para este caso:
+
+```
+[Running] node "c:\Users\Administrador\Documents\Zaza\JavaScript-HolaMundo-\JavaScript_YT\01-tipos\09-argumentos.js"
+Numero1: 10
+Numero2: 12
+Calculos:
+La suma de 10 y 12 es: 22
+La resta de 10 y 12 es: 2
+La multiplicacion de 10 y 12 es: 120
+La division de 10 y 12 es: 1.2
+```
+
+## Argumentos y Parámetros
+
+Es muy facil confundir estos dos terminos, ya que no son lo mismo pero se los utiliza con el mismo nombre, por eso de crea la confunsión.
+
+### Parametros
+
+Son los valores que recibe la función para ser utilizados que si o si debe tener. Estos se definen en la sintaxis de la función entre los paréntesis y se separan por una coma. Para el ejemplo de los cálcuos la función sumar() recibe el parametro x a y.
+
+```javascript
+function sumar(x, y) {
+  sum = x + y;
+  return sum;
+}
+```
+
+Por lo que siempre deberá recibir un primer número que lo asigna a x y recibe un segundo numero que lo asigan a y.
+
+### Argumentos
+
+Son los valores que se envian a la función entre los paréntesis cuando se la llama a la función ya que nos los estará solicitando la función. Pero podemos enviarle más valores que los que solicita y la función irá asignando según el orden. Por lo que podemos cambiar los nombres para ver la diferencia:
+
+```javascript
+// Valores
+x = 10;
+y = 12;
+console.log("Numero1: " + x);
+console.log("Numero2: " + y);
+// Funciones
+function sumar(par1, par2) {
+  sum = par1 + par2;
+  return sum;
+}
+suma = sumar(x, y);
+```
+
+Cuando se llama a la función sumar() se le pasa comor argumento x a y y al recibirlo asigana en ese orden a los parametros par1 y par2. Por lo que equivale x-->par1 e y-->par2. Y se ejecuta perfectamente.
+
+## Propiedad arguments
+
+Una función puede recibir más argumentos que los parametros que necesita, por lo que asignará en el orden que se envian los valores a los parámetros necesarios y el resto los guarda como argumentos recibidos. Vamos a enviar más argumentos desde el llamado:
+
+```javascript
+// Multiples argumentos
+function sumar2(par1, par2) {
+  sum = par1 + par2;
+  console.log(arguments);
+  return sum;
+}
+suma = sumar2(9, 7, 10, 11, 7, 21);
+```
+
+Donde le pasamos más argumentos que los parametros que necesita. Y agregamos un console.log(arguments); que nos dirá cuantos argumentos recibe en forma de arreglo:
+
+```
+[Running] node "c:\Users\Administrador\Documents\Zaza\JavaScript-HolaMundo-\JavaScript_YT\01-tipos\09-argumentos.js"
+[Arguments] { '0': 9, '1': 7, '2': 10, '3': 11, '4': 7, '5': 21 }
+```
+
+## Resumen
+
+- Las funciones se usan para reutilizar código
+- Se declaran con un nombre de vervo sin conjugar
+- Se las llama y se le pasan los valores de Argumentos
+- Reciben en el llamdo los Argumentos y asignan los valores en orden a los Parámetros
+- Pueden recibir más Argumentos que parámetros
+- No pueden faltar Parámetros por definir.
