@@ -453,3 +453,147 @@ Y por consola ya no estará la propiedad:
 ```
 
 # Arreglos (arrays)
+
+## Concepto
+
+Son arreglos de objetos o variables, en un objeto tenemos propieades que son llave valor, pero un arreglos puede contener objetos junto con propiedades y valores por serparado. También algo muy importante a diferencia de un objeto es que va a respetar el orden con el que agregamos los valores u objetos.
+
+## Sintaxis
+
+La sintaxis de un arreglo es la definición de su nombre como una propiedad y luego se iguala a llaver cuadradas, que incluyen el contenido de objetps separados por una coma. Crearemos un objeto llamado perro también para agregarlo al arreglo llamado animales:
+
+```javascript
+let perro = {
+  edad: 10,
+  color: "marron",
+  nombre: "Coly",
+};
+let animales = ["chanchito", "caballo", perro];
+console.log(animales);
+```
+
+Por consola tendremos:
+
+```
+[
+   "chanchito",
+   "caballo",
+   {
+       "edad": 10,
+       "color": "marron",
+       "nombre": "Coly"
+   }
+]
+```
+
+Vemos que incluye los dos valores y el objeto en orden.
+
+## Ver valores
+
+En el arreglo como respeta el orden y nos asegura que siempre lo va a respetar, le asigna un indice a cada objeto o valor empezando por el 0. Para poder ver el valor de un indice en particular del arreglo usamos la sintaxis de nombre del arreglo seguido de corchete cuadrado y adentro el indice:
+
+```javascript
+console.log("Primer animal: " + animales[0]);
+console.log("Segundo animal: " + animales[1]);
+```
+
+Y por consola tendremos:
+
+```
+[Running] node "c:\Users\Administrador\Documents\Zaza\JavaScript-HolaMundo-\JavaScript_YT\01-tipos\07-arrays.js"
+Primer animal: chanchito
+Segundo animal: caballo
+```
+
+SI quieramos obtener valores del objeto perro dentro del array debemos concatenar sintaxis de llamados, primero el objeto y luego su propiedad:
+
+```javascript
+console.log(animales[2].nombre);
+```
+
+Con animales\[2\] obtenemos el objeto perro y luego con la sintaxis de punto seguido y el nombre del la propiedad obtenemos el nombre.
+
+```javascript
+console.log(
+  "El arreglo tiene un " +
+    animales[0] +
+    ", un " +
+    animales[1] +
+    " y un perro de nombre " +
+    animales[2].nombre +
+    ", de color " +
+    animales[2].color +
+    " y una edad de " +
+    animales[2].edad +
+    " años."
+);
+```
+
+Mostrando:
+
+```
+El arreglo tiene un chanchito, un caballo y un perro de nombre Coly, de color marron y una edad de 10 años.
+```
+
+## Agregar un objeto/valor
+
+Para agregar un objeto o valor demtro del arreglo debemos llamar al arreglo desiganar el indice donde se creará el nuevo valor y pasar el valor. Debemos tener cuidado con los indices ya que pueden pasar dos cosas, que cambie el valor del indice si ya existe y que si no existen indices hasta el valor que queremos los completa con espacios vacios.
+
+```javascript
+animales[5] = "dragón"; // Agrega espacio vacios hasta indice 5
+animales[0] = "cabra"; // Cambia valor de chanchito
+console.log(animales);
+```
+
+Por consola tendremos:
+
+```
+[
+   "cabra",
+   "caballo",
+   {
+       "edad": 10,
+       "color": "marron",
+       "nombre": "Coly"
+   },
+   null,
+   null,
+   "dragón"
+]
+```
+
+Donde vemos dos espacios nulos hasta el indice 5
+
+## Array como Objeto en JavaScript
+
+El array en JavaScript es como un objeto más estricto pero es un objeto. Por lo que tendrá propiedades. Luego tendremos propiedades ya creadas en el prototipo de array de JavaScript a las que podemos acceder. como por ejemplo length que es la longitud del arreglo.
+
+Vamos a ver primero que nos devuelve la consola si queremos ver que tipo de valor es el array con typeof
+
+```javascript
+console.log("El arreglo animales es de tipo: " + typeof animales);
+```
+
+Mostrando:
+
+```
+[Running] node "c:\Users\Administrador\Documents\Zaza\JavaScript-HolaMundo-\JavaScript_YT\01-tipos\07-arrays.js"
+El arreglo animales es de tipo: object
+```
+
+Devolviendo un _**objeto**_
+
+Como es un objeto de tipo array ya dijimos que JavaScript incluye propiedades en el prototipo para usarlas, length es una de ellas y la forma de llamarla es como toda propiedad con el punto seguido:
+
+```javascript
+console.log("La longitu del arreglo es: " + animales.length);
+```
+
+Mostrando:
+
+```
+[Running] node "c:\Users\Administrador\Documents\Zaza\JavaScript-HolaMundo-\JavaScript_YT\01-tipos\07-arrays.js"
+La longitu del arreglo es: 6
+```
+
+.
