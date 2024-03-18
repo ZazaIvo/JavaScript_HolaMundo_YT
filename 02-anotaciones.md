@@ -451,4 +451,34 @@ El AND sólo tomará las coincidencias del 1 en los byte comparados, es decir qu
 
 Vemos que solo toma los valores 1 donde coinciden en ambos bytes comparados por eso en el (1 & 4) no coincien en ninguno y devuelve 0
 
-.
+# Orden de operaciones
+
+Empezamos con un ejemplo basico:
+
+```javascript
+let resultado = (8 / 2) * (2 + 2);
+console.log(resultado);
+```
+
+Donde devuelve 16. Esto es porque primero se resuelven los parentesis y las diviciones y luego las multiplicaciones. Esto es lo ya visto en matemáticas. Es decir que sigue las reglas de agrupamiento y distribución.
+
+Siendo según en el ejemplo la resolución por agrupamiento:
+
+<table><tbody><tr><td>Lógica</td><td>Resultado</td></tr><tr><td><pre><code class="language-javascript">resultado = (8/2)*(2+2);
+console.log(resultado);</code></pre></td><td><pre><code class="language-">16</code></pre></td></tr></tbody></table>
+
+Pero si cambiamos el order de agrupamiento:
+
+<table><tbody><tr><td>Lógica</td><td>Resultado</td></tr><tr><td><pre><code class="language-javascript">resultado = 8/(2*2)+2;
+console.log(resultado);</code></pre></td><td><pre><code class="language-">4</code></pre></td></tr></tbody></table>
+
+Si queremos que nos de el resultado de 1 debemos cambiar el orden de los paréntesis:
+
+<table><tbody><tr><td>Lógica</td><td>Resultado</td></tr><tr><td><pre><code class="language-javascript">resultado = 8/(2*(2+2));
+console.log(resultado);</code></pre></td><td><pre><code class="language-">1</code></pre></td></tr></tbody></table>
+
+Si necesitamos especificar un orden en especial debemos indicarlo con paréntesis redondos, resolviendo desde los internos a los externos:
+
+```
+( 3° ( 2° (1°)))
+```
