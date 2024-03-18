@@ -401,3 +401,54 @@ Funcion 2
 Como la fn3() es false no la devuelve pero se ejecuta igual dentro de la variable.
 
 Vimos entonces que hay valores que se interpretan con falso además de false y que si evaluamos expresiones y devuelven algún valor de estos depende de si usamos OR o AND nos mostrará el primer valor verdadero o todos respectivamente.
+
+# Op. Bitwise
+
+Estos operadores se utilizan muy poco incluso puede que núnca nos encontremos con ellos en la vida profecional.
+
+- Bit: digito en binario que puede tomar el valor de 0 o de 1
+- Byte: combinación de 8 bits que será por ejemplo 00000001 o otro byte puede ser 01000010
+
+El incremento será:
+
+- 00000000 -> 0
+- 00000001 -> 1
+- 00000010 -> 2
+- 00000011 -> 3
+- 00000100 -> 4
+- 00000101 -> 5
+- 00000110 -> 6
+- 00000111 -> 7
+
+Esto es escribir número con código binario y existe una fórmula matemática para poder transformar los número en binarios ya que las computadoras trabajan en binario.
+
+Sistemas de representar números pueden ser decimal (dies caracteres) o binario (dos caracteres):
+
+- Decimal: 0,1,2,3,4,5,6,7,8,9
+- Binario: 0,1
+
+## OR en bitwise
+
+La comparación que se hace es de un número en byte se completa de los 8 dígitos los que tengan el valor 1 y devuelve esas coincidencias como un nuevo byte. La sintaxis del OR es con solo una barra:
+
+Si comparamos el byte de 1 vemos que tiene el primer lugar con el 1 y el resto son todos ceros 00000001 y si tomamos el byte del 3 vemos que tiene el primero y el segúndo con el 1 por lo que tomar los valores donde haya 1 sería agregar el 1 al segúndo lugar dando como resultado el byte del 3
+
+console.log(1 | 3); // 00000011 -> 3
+
+Para el caso de compara el 1 y el 4 vamos a completar primero el 1 con el primer lugar, luego al comparar con el byte del 4 vemos que tiene un 1 en el tercer lugar por lo que lo agregamos al resultado en el tercer lugar, dando como resultado el byte del 5 -> 00000101
+
+console.log(1 | 4); // 00000101 -> 5
+
+Por consola:
+
+<table><tbody><tr><td>Lógica</td><td>Resultado</td></tr><tr><td><pre><code class="language-javascript">console.log(1 | 3); // 00000011</code></pre></td><td><pre><code class="language-">3</code></pre></td></tr><tr><td><pre><code class="language-javascript">console.log(1 | 4); // 00000101</code></pre></td><td><pre><code class="language-">5</code></pre></td></tr><tr><td><pre><code class="language-javascript">console.log(1 | 2); // 00000011</code></pre></td><td><pre><code class="language-">3</code></pre></td></tr></tbody></table>
+
+## AND en bitwise
+
+El AND sólo tomará las coincidencias del 1 en los byte comparados, es decir que si en un caracter no coinciden los dos 1 tomará el 0:
+
+<table><tbody><tr><td>Lógica</td><td>Resultado</td></tr><tr><td><pre><code class="language-javascript">console.log(1 &amp; 3); // 00000001</code></pre></td><td><pre><code class="language-">1</code></pre></td></tr><tr><td><pre><code class="language-javascript">console.log(1 &amp; 4); // 00000000</code></pre></td><td><pre><code class="language-">0</code></pre></td></tr><tr><td><pre><code class="language-javascript">console.log(2 &amp; 3); // 00000010</code></pre></td><td><pre><code class="language-">2</code></pre></td></tr></tbody></table>
+
+Vemos que solo toma los valores 1 donde coinciden en ambos bytes comparados por eso en el (1 & 4) no coincien en ninguno y devuelve 0
+
+.
