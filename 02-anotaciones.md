@@ -314,4 +314,90 @@ Por consola tendremos:
 Mostrar catálogo infantil:  true
 ```
 
-# .
+# Short - circuit
+
+Si en la consola del navegador evaluamos entro un arreglo y un objeto primero en OR y luego en AND. Como ambos existen vacios devolveran un true. Pero vemos que nos da como resultado:
+
+```
+[] || {}
+[]
+[] && {}
+{}
+```
+
+Donde del OR nos devuelve el primero que evalue en true y el AND nos devuelve si todos son true el último que evalua en true. Por eso de la expresion \[\] || {} nos devuelve verdadero el primero \[\] y de la expresión de \[\] && {} nos devuelve el último true {}.
+
+Para saber cuales valores evalúan en verdadero es más facil saber cuales evalúan en falso primero y luego el resto serán verdaderos. Lo valores que devuelven falso serán:
+
+- false
+- 0
+- ' '
+- null
+- undefined
+- NaN
+
+## Falsy OR
+
+Tenemos una plataforma que si el usuario no existe o no está logueado puede acceder a ver contenido gratuito como marketing de la plataforma. Donde si no tiene un nombre al usuario le asigne el valor de 'Anonimo'. Esto lo podemos hacer con el OR ya que si dos valores son verdaderos nos devuelve el primer valor verdadero que quisieramos que sea el nombre:
+
+let nombre = '';
+
+let userName= nombre || 'Anonimo';
+
+Como en este caso el nombre es un string vacio será falso y devuelve el valor verdadero que es un string 'Anonimo' pero si tubieva un valor nombre nos devueve este. Probamos y vemos por consola:
+
+<table><tbody><tr><td>Lógica</td><td>Resultado</td></tr><tr><td><pre><code class="language-javascript">let nombre = '';
+let userName= nombre || 'Anonimo';
+console.log('El usuario es: ',userName);</code></pre></td><td><pre><code class="language-">El usuario es:  Anonimo</code></pre></td></tr><tr><td><pre><code class="language-javascript">nombre = 'Ivan'
+userName= nombre || 'Anonimo';
+console.log('El usuario es: ', userName);</code></pre></td><td><pre><code class="language-">El usuario es:  Ivan</code></pre></td></tr></tbody></table>
+
+Vemos que cuando los dos son verdaderos nos devuelve el valor del primer verdadero. Se dice el primer verdadero porque pueden ser de más de una comparativa agregando otra variable para comparar:
+
+<table><tbody><tr><td>Lógica</td><td>Resultado</td></tr><tr><td><pre><code class="language-javascript">let nombre = '';
+let alias = '';
+let userName= nombre || alias || 'Anonimo';
+console.log('El usuario es: ',userName);</code></pre></td><td><pre><code class="language-">El usuario es:  Anonimo</code></pre></td></tr><tr><td><pre><code class="language-javascript">nombre = 'Ivan'
+alias = '';
+userName= nombre || alias || 'Anonimo';
+console.log('El usuario es: ', userName);</code></pre></td><td><pre><code class="language-">El usuario es:  Ivan</code></pre></td></tr><tr><td><pre><code class="language-javascript">nombre = ''
+alias = 'Zaza';
+userName= nombre || alias || 'Anonimo';
+console.log('El usuario es: ', userName);</code></pre></td><td><pre><code class="language-">El usuario es:  Zaza</code></pre></td></tr><tr><td><pre><code class="language-javascript">nombre = 'Ivan'
+alias = 'Zaza';
+userName= nombre || alias || 'Anonimo';
+console.log('El usuario es: ', userName);</code></pre></td><td><pre><code class="language-">El usuario es:  Ivan</code></pre></td></tr></tbody></table>
+
+Vemos en el último caso que los tres valores son true nos devuelve el primer true que es el nombre.
+
+## Falsy AND
+
+Para el caso de AND (&&) se puede usar si dos o más funciones se ejecutan tomar el valor de las que sean veraderas.
+
+```javascript
+function fn1() {
+  console.log("Funcion 1");
+  return true;
+}
+function fn2() {
+  console.log("Funcion 2");
+  return false;
+}
+function fn3() {
+  console.log("Funcion 3");
+  return true;
+}
+let x = fn1() && fn2() && fn3();
+```
+
+Lo que nos devuelve las que sean verdaderas:
+
+```
+[Running] node "c:\Users\Administrador\Documents\Zaza\JavaScript-HolaMundo-\JavaScript_YT\02-operadores\05-falsy.js"
+Funcion 1
+Funcion 2
+```
+
+Como la fn3() es false no la devuelve pero se ejecuta igual dentro de la variable.
+
+Vimos entonces que hay valores que se interpretan con falso además de false y que si evaluamos expresiones y devuelven algún valor de estos depende de si usamos OR o AND nos mostrará el primer valor verdadero o todos respectivamente.
