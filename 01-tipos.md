@@ -74,7 +74,7 @@ Los datos se pueden clasificar en:
 
 <table><tbody><tr><td><p><strong>Primitivos</strong></p><ul><li>number</li><li>string</li><li>boolean</li><li>undefined</li><li>null</li></ul></td><td><p><strong>De Referencia</strong></p><ul><li>Array</li><li>Object</li><li>Functions</li><li>Clases</li></ul></td></tr></tbody></table>
 
-La diferencia es que al ser guardados en la memória RAM para los valores se asigna un espacio fijo que no se va a poder expandir y que es muy rapida. Esta porción de memória se llama _Stack_  y es donde se guardan los valores _Primitivos_ Se llaman datos primitivos porque cuando lo busquemos en la porción de memoria _Stack_ encontraremos el valor directamente.
+La diferencia es que al ser guardados en la memória RAM para los valores se asigna un espacio fijo que no se va a poder expandir y que es muy rapida. Esta porción de memória se llama _Stack_  y es donde se guardan los valores _Primitivos._ Se llaman datos primitivos porque cuando lo busquemos en la porción de memoria _Stack_ encontraremos el valor directamente.
 
 En cambio se puede asignar una memoria dinámica de la RAM que puede crecer si es necesario se llama _Heap_, en ella se guardan los valores _De Referencia_ Porque un array por ejemplo puede crecer o un objeto puede nececitar más o menos espacio. Se llama de referencia porque cuando busquemos el valor vamos a encontrar una dirección de referencia a otra parte de la memória. Por ejemplo un objeto que tiene una propiedad de nombre y otra de apellido, cada valor de cada propiedad puede estar guardado en una memoria _Stack_ y es llamado desde la memoria _Heap_
 
@@ -208,8 +208,8 @@ Por lo que no restringe al tipo de valor inicial. Realizando un cambio de tipo.
 Si en JavaScript colocamos antes de la variable la palabra reservada typeof nos dirá el tipo de valor que tiene guardado la variable:
 
 ```javascript
-let numero = 42;
 let nombre = "Ivan";
+let numero = 42;
 let verdadero = true;
 let falso = false;
 let nolu = null;
@@ -227,11 +227,11 @@ El tipo de valor de nombre: string
 El tipo de valor de número: number
 ```
 
-Donde nos indica el tipo de valor que contiene en ese momento. Porque si lo cambiamos vemor como nos indica otro tio:
+Donde nos indica el tipo de valor que contiene en ese momento. Porque si lo cambiamos vemos como nos indica otro tipo:
 
 ```javascript
-let numero = "Hola";
 let nombre = 70;
+let numero = "Hola";
 console.log("El tipo de valor de nombre: " + typeof nombre);
 console.log("El tipo de valor de número: " + typeof numero);
 ```
@@ -275,7 +275,7 @@ El tipo de valor de undf: undefined
 
 ### Tipo Null  como Object
 
-Como vimos anteriormente el tipo de valor de null según typeof es object no null. Si vamos a la documentación de mozilla que es lo que ellos implementaron en su navegador WEB veremos en el apartado 'Null type' pero el la tabla de valores primitivos que para el tipo de null la palabra reservada typeof devolverá "object"
+Como vimos anteriormente el tipo de valor de null según typeof es object no null. Si vamos a la documentación de mozilla que es lo que ellos implementaron en su navegador WEB veremos en el apartado 'Null type' la tabla de valores primitivos que para el tipo de null la palabra reservada typeof devolverá "object"
 
 | Type                                                                                                    | Result        |
 | ------------------------------------------------------------------------------------------------------- | ------------- |
@@ -327,7 +327,7 @@ console.log(nombre); // Depurar
 
 # Objetos
 
-Los objetos son de tipo de referencia ya que vamos a encontrar en su lugar una referencia a donde se estan guardando los datos en cada una de sus propiedades.
+Los objetos son de tipo de referencia ya que vamos a encontrar en su lugar una referencia a donde se están guardando los datos en cada una de sus propiedades.
 
 ## Concepto
 
@@ -351,7 +351,7 @@ Vamos a agruparlas en un personaje que será un objeto que contiene todas estas 
 let personaje = {};
 ```
 
-Donde al no haber nada entre las llaves esta vacío. Y como lo estamos definiendo ahora agregando propiedades se dice que es un objeto literal. Completamos con una propiedad y seguido de dos puntos su valor, luego agregamos la siguiente separada por una coma.
+Donde al no haber nada entre las llaves esta vacío. Y como lo estamos definiendo ahora agregando propiedades se dice que es un objeto literal. Completamos con una propiedad y seguido de dos puntos su valor, luego agregamos la siguiente separada por una coma. Ya no serán variables sino propiedades por ello no se usa el "igual" y se usa el "dos puntos"
 
 ```javascript
 // Objeto
@@ -365,7 +365,7 @@ console.log(personaje);
 
 La coma del último valor es opcional, pero es mejor dejarla puesta, ya que si no lo hacemos cuando tengamos que agregar otra propiedad y tengamos que agregar la coma, tambien será una modificación. Por lo que en el control de verciones se verán dos líneas editadas en vez de una.
 
-Por consola nos mostrará el objeto pero no tendrá el orden de las propiedades como lo indicamos ya que JavaScript no asegura el orden de las propiedades. Pero si copiamos el objeto al pegarlo aqui se aomodan
+Por consola nos mostrará el objeto pero **no tendrá el orden** de las propiedades como lo indicamos ya que JavaScript no asegura el orden de las propiedades. Pero si copiamos el objeto al pegarlo aqui se acomodan
 
 ```javascript
 {
@@ -414,16 +414,16 @@ De esta forma dá el mismo resultado.
 
 ## Modificar Propiedad
 
-Para poder cambiar el valor de una propiedad debemos llamar al objeto luego con cualquier sintaxis indicamos que propiedad y luego igualamos(asignación) al valor nuevo.
+Para poder cambiar el valor de una propiedad debemos llamar al objeto luego con cualquier sintaxis indicamos que propiedad y luego igualamos (asignación) al valor nuevo.
 
 ```javascript
 personaje.nombre = "Suriji";
-personaj["edad"] = 16;
+personaje["edad"] = 16;
 ```
 
 Quedando modifcados los valores de nombre y edad.
 
-## object.key Vs object\['key'\]
+## object.key Vs object\[keys\]
 
 La diferencia entre las dos sintaxis es la utilidad que se puede dar, si conocemos el nombre de la propiedad se utiliza comúnmente con el punto seguido. Pero si vamos a iterar dentro del objeto es más usado el corchete ya que podemos crear una propiedad que irá cambiando dentro del corchete:
 
@@ -432,7 +432,7 @@ let llave = "edad";
 personaje[llave] = 16;
 ```
 
-Por lo que iremos cambiando el valor de llave dentro de los corchetes.
+Por lo que iremos cambiando el valor de llave dentro de los corchetes. Es decir que el object.key es estático y el object\[keys\] es dianmico siendo keys = key; cambiando para cada iteración.
 
 ## Eliminar propiedad
 
@@ -460,14 +460,16 @@ Son arreglos de objetos o variables, en un objeto tenemos propieades que son lla
 
 ## Sintaxis
 
-La sintaxis de un arreglo es la definición de su nombre como una propiedad y luego se iguala a llaver cuadradas, que incluyen el contenido de objetps separados por una coma. Crearemos un objeto llamado perro también para agregarlo al arreglo llamado animales:
+La sintaxis de un arreglo es la definición de su nombre como una variable y luego se iguala a llaves cuadradas, que incluyen el contenido de objetos separados por una coma. Crearemos un objeto llamado perro también para agregarlo al arreglo llamado animales:
 
 ```javascript
+// Objeto perro
 let perro = {
   edad: 10,
   color: "marron",
   nombre: "Coly",
 };
+// Arreglo animales
 let animales = ["chanchito", "caballo", perro];
 console.log(animales);
 ```
@@ -505,13 +507,13 @@ Primer animal: chanchito
 Segundo animal: caballo
 ```
 
-SI quieramos obtener valores del objeto perro dentro del array debemos concatenar sintaxis de llamados, primero el objeto y luego su propiedad:
+Si quisieramos obtener valores del objeto perro dentro del array debemos concatenar la sintaxis de llamados, primero el objeto y luego su propiedad:
 
 ```javascript
 console.log(animales[2].nombre);
 ```
 
-Con animales\[2\] obtenemos el objeto perro y luego con la sintaxis de punto seguido y el nombre del la propiedad obtenemos el nombre.
+Con animales\[2\] obtenemos el objeto perro y luego con la sintaxis de punto seguido el nombre del la propiedad obtenemos el nombre.
 
 ```javascript
 console.log(
@@ -596,6 +598,8 @@ Mostrando:
 La longitu del arreglo es: 6
 ```
 
+Esto quiere decir que tiene 7 propiedades u objetos ya que empieza desde el 0.
+
 # Funciones
 
 Se pueden pensar como procedimientos o instrucciones a ejecutar. Que se utilizarán cuando se las llame.
@@ -617,7 +621,7 @@ Si no se llama a la función, nada de código se ejecuta. Por lo que debemos lla
 ```
 function saludar() {
   console.log("Hola Mundo");
-}
+};
 saludar(); // LLamado
 ```
 
@@ -630,13 +634,13 @@ function sumar(x, y) {
 }
 ```
 
-Cuando retorna un valor debemos asignarlo a un contenedor que guarde ese valor. Para ello podemos crear una variable y que esta llame a la funcion:
+Cuando retorna un valor debemos asignarlo a un contenedor que guarde ese valor. Para ello podemos crear una variable y que esta llame a la función:
 
 ```javascript
-suma = sumar(x, y);
+suma = sumar(1, 3);
 ```
 
-Lo que hara es llamar a la función de sumar pasandole los valores de x a y. Cuando la función termine devolvera el resultado que se asignará a la variable suma.
+Lo que hara es llamar a la función de sumar pasandole los valores de x=1 a y=3. Luego dentro de la función resolverá sum = x + y; devolviendo sum = 4. Cuando la función termine devolvera el resultado (sum) que se asignará a la variable suma con resultado de 4.
 
 ## Argumentos
 
@@ -687,7 +691,7 @@ x = 10;
 y = 12;
 console.log("Numero1: " + x);
 console.log("Numero2: " + y);
-console.log("Calculos:");
+console.log("Cálculos:");
 suma = sumar(x, y);
 resta = restar(x, y);
 multi = multiplicar(x, y);
@@ -705,7 +709,7 @@ Lo que nos devuelve para este caso:
 [Running] node "c:\Users\Administrador\Documents\Zaza\JavaScript-HolaMundo-\JavaScript_YT\01-tipos\09-argumentos.js"
 Numero1: 10
 Numero2: 12
-Calculos:
+Cálculos:
 La suma de 10 y 12 es: 22
 La resta de 10 y 12 es: 2
 La multiplicacion de 10 y 12 es: 120
@@ -718,7 +722,7 @@ Es muy facil confundir estos dos terminos, ya que no son lo mismo pero se los ut
 
 ### Parametros
 
-Son los valores que recibe la función para ser utilizados que si o si debe tener. Estos se definen en la sintaxis de la función entre los paréntesis y se separan por una coma. Para el ejemplo de los cálcuos la función sumar() recibe el parametro x a y.
+Son los valores que recibe la función para ser utilizados que si o si debe tener. Estos se definen en la sintaxis de la función entre los paréntesis y se separan por una coma. Para el ejemplo de los cálcuos la función sumar() recibe el párametro "x" y el parámetro "y".
 
 ```javascript
 function sumar(x, y) {
@@ -727,7 +731,7 @@ function sumar(x, y) {
 }
 ```
 
-Por lo que siempre deberá recibir un primer número que lo asigna a x y recibe un segundo numero que lo asigan a y.
+Por lo que siempre deberá recibir por lo menos un primer número que lo asigna a x y recibe un segundo número que lo asigan a y.
 
 ### Argumentos
 
@@ -747,11 +751,11 @@ function sumar(par1, par2) {
 suma = sumar(x, y);
 ```
 
-Cuando se llama a la función sumar() se le pasa comor argumento x a y y al recibirlo asigana en ese orden a los parametros par1 y par2. Por lo que equivale x-->par1 e y-->par2. Y se ejecuta perfectamente.
+Cuando se llama a la función sumar() se le pasa comor argumento "x" e "y" y al recibirlos asigna en ese orden a los parametros par1 y par2. Por lo que equivale (x-->par1) e (y-->par2). Y se ejecuta perfectamente.
 
-## Propiedad arguments
+## Propiedad ".arguments"
 
-Una función puede recibir más argumentos que los parametros que necesita, por lo que asignará en el orden que se envian los valores a los parámetros necesarios y el resto los guarda como argumentos recibidos. Vamos a enviar más argumentos desde el llamado:
+Una función puede recibir más argumentos que los parámetros que necesita, por lo que asignará en el orden que se envian los valores a los parámetros necesarios y el resto los guarda como argumentos recibidos. Vamos a enviar más argumentos desde el llamado:
 
 ```javascript
 // Multiples argumentos
@@ -770,6 +774,8 @@ Donde le pasamos más argumentos que los parametros que necesita. Y agregamos un
 [Arguments] { '0': 9, '1': 7, '2': 10, '3': 11, '4': 7, '5': 21 }
 ```
 
+"arguments" es un objeto similar a `Array` accesible dentro de la función,que contiene los valores de los argumentos pasados a esa función.
+
 ## Resumen
 
 - Las funciones se usan para reutilizar código
@@ -778,3 +784,45 @@ Donde le pasamos más argumentos que los parametros que necesita. Y agregamos un
 - Reciben en el llamdo los Argumentos y asignan los valores en orden a los Parámetros
 - Pueden recibir más Argumentos que parámetros
 - No pueden faltar Parámetros por definir.
+
+# Declaraciones y Expresiones
+
+En cada lenguaje se implementarán declaraciones y extenciones dependiendo de su sintaxis. Para JavaScript tendremos tres estados o partes de la lógica, las declaraciones, las statement y las expresiones.
+
+- Expressions -- traducido --> expresiones
+- Declarations -- traducido --> declaración (verbal)
+- Statement -- traducido --> declaración (escrita)
+
+## Declaration
+
+Se le llama declaración en JavaScript a una referencia que se usará en un futuro y son:
+
+- let
+- cosnt
+- function
+- function\*
+- async function
+- async function\*
+- class
+- export/import
+
+Estas son las declaraciones que debemos aprendernos.
+
+## Statement
+
+Todas las instrucciones que no se encuentran en la lista de declaraciones serán Statement. Ya que no serán llamadas o declaradas para un futuro, sino que serán ejecutadas en el momento que se las llame. Como son:
+
+- if
+- else if
+- for
+- switch
+
+## Expresiones
+
+Las expresiones son cualquier linea de código o porción de código que evalue un valor. Cómo por ejemplo 4+6 evalua en 10, o una asignación de un valor a una variable como x = 10; esta adquiriendo un valor. O una porción de código como un llamado a una función que se le pasó parámetros y regresa un valor.
+
+Cada vez que el codigo hace algo y se puede obtener un valor de ello es una expresión.
+
+## Regla memotécnica
+
+A todo lo que le podemos hacer un console.log es una expresión y a lo que no le podemos hacer un console.log() es una Declaracion/Statement

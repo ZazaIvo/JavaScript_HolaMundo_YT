@@ -1,45 +1,3 @@
-# Declaraciones y Expresiones
-
-En cada lenguaje se implementarán declaraciones y extenciones dependiendo de su sintaxis. Para JavaScript tendremos tres estados o partes de la lógica, las declaraciones, las statement y las expresiones.
-
-- Expressions -- traducido --> expresiones
-- Declarations -- traducido --> declaración (verbal)
-- Statement -- traducido --> declaración (escrita)
-
-## Declaration
-
-Se le llama declaración en JavaScript a una referencia que se usará en un futuro y son:
-
-- let
-- cosnt
-- function
-- function\*
-- async function
-- async function\*
-- class
-- export/import
-
-Estas son las declaraciones que debemos aprendernos.
-
-## Statement
-
-Todas las instrucciones que no se encuentran en la lista de declaraciones serán Statement. Ya que no serán llamadas o declaradas para un futuro, sino que serán ejecutadas en el momento que se las llame. Como son:
-
-- if
-- else if
-- for
-- switch
-
-## Expresiones
-
-Las expresiones son cualquier linea de código o porción de código que evalue un valor. Cómo por ejemplo 4 +6 evalua en 10, o una asignación de un valor a una variable como x = 10; esta adquiriendo un valor. O una porción de código como un llamado a una función que se le pasó parámetros y regresa un valor.
-
-Cada vez que el codigo hace algo y se puede obtener un valor de ello es una expresión.
-
-## Regla memotécnica
-
-A todo lo que le podemos hacer un console.log es una expresión y a lo que no le podemos hacer un console.log() es una Declaracion/Statement
-
 # Operadores
 
 Los operadores sirven para crear expresiones, con las expresiones creamos algoritmos y con ellos solucionamos un problema. Lo operadores que veremos son:
@@ -482,3 +440,7 @@ Si necesitamos especificar un orden en especial debemos indicarlo con paréntesi
 ```
 ( 3° ( 2° (1°)))
 ```
+
+# Op. Ternarios
+
+Estos operadores ya empiezan a modificar el flujo de ejecución de la lógica.
