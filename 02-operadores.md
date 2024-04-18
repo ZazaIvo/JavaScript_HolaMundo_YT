@@ -39,7 +39,7 @@ console.log((a / b) * (a + b));
 
 Dando como resultado 8.571428571428571
 
-Hay otro operador que es el módulo con el simbolo de % que nos muestra la resta de una divición. Por ejemplo si dividimos 7 en 5 entra el 5 una vez y sobran dos enteros, entoneces el módulo es 2:
+Hay otro operador que es el módulo con el simbolo de % que nos muestra el resto de una divición. Por ejemplo si dividimos 7 en 5 entra el 5 una vez y sobran dos enteros, entoneces el módulo es 2:
 
 ```javascript
 console.log(b % a); // modulo
@@ -150,7 +150,7 @@ a -= 5; // Decrementa 5
 a *= 5; // Multiplica 5
 a /= 5; // Divide 5
 a %= 5; // Resto de 5
-a **= 5; // Divide 5
+a **= 5; // potencia 5
 ```
 
 La vista por consola no tendrá mucho sentido ya que para ver la diferencia debeíamos asiganar cada asignación a una variable y mostrarla. Y la lógica de esto es reducir el código.
@@ -274,7 +274,7 @@ Mostrar catálogo infantil:  true
 
 # Short - circuit
 
-Si en la consola del navegador evaluamos entro un arreglo y un objeto primero en OR y luego en AND. Como ambos existen vacios devolveran un true. Pero vemos que nos da como resultado:
+Si en la consola del navegador evaluamos entre un arreglo y un objeto primero en OR y luego en AND. Como ambos existen vacios devolveran un true. Pero vemos que nos da como resultado:
 
 ```
 [] || {}
@@ -296,7 +296,7 @@ Para saber cuales valores evalúan en verdadero es más facil saber cuales eval�
 
 ## Falsy OR
 
-Tenemos una plataforma que si el usuario no existe o no está logueado puede acceder a ver contenido gratuito como marketing de la plataforma. Donde si no tiene un nombre al usuario le asigne el valor de 'Anonimo'. Esto lo podemos hacer con el OR ya que si dos valores son verdaderos nos devuelve el primer valor verdadero que quisieramos que sea el nombre:
+Tenemos una plataforma que si el usuario no existe o no está logueado puede acceder a ver contenido gratuito como marketing de la plataforma. Donde si no tiene un nombre al usuario le asigna el valor de 'Anonimo'. Esto lo podemos hacer con el OR ya que si dos valores son verdaderos nos devuelve el primer valor verdadero que quisieramos que sea el nombre:
 
 let nombre = '';
 
@@ -346,17 +346,19 @@ function fn3() {
   return true;
 }
 let x = fn1() && fn2() && fn3();
+console.log(x);
 ```
 
-Lo que nos devuelve las que sean verdaderas:
+Lo que ejecuta las funciones y las que sean veraderas las devuelve:
 
 ```
 [Running] node "c:\Users\Administrador\Documents\Zaza\JavaScript-HolaMundo-\JavaScript_YT\02-operadores\05-falsy.js"
 Funcion 1
 Funcion 2
+false
 ```
 
-Como la fn3() es false no la devuelve pero se ejecuta igual dentro de la variable.
+Como la fn3() es false no la devuelve pero se ejecuta igual dentro de la variable. Pero si imprimimos la variable x no dará "false" ya que una de las funciones fue de resultado "false".
 
 Vimos entonces que hay valores que se interpretan con falso además de false y que si evaluamos expresiones y devuelven algún valor de estos depende de si usamos OR o AND nos mostrará el primer valor verdadero o todos respectivamente.
 
@@ -444,3 +446,28 @@ Si necesitamos especificar un orden en especial debemos indicarlo con paréntesi
 # Op. Ternarios
 
 Estos operadores ya empiezan a modificar el flujo de ejecución de la lógica.
+
+Tendremos una expresión que si devuelve true o si devuelve false el operador decide que valor va a asignar.  La sintaxis es con un signo de pregunta despues de la expresión:
+
+```javascript
+// expresion? 'si es true'= valor1 : 'si es false'= valor2
+let edad = 18;
+let acceso = edad > 17 ? "Permitir ingreso" : "No puede ingresar";
+console.log(acceso);
+```
+
+Entonces de la expresion de comparación de edad mayor que 17 decidira si permite o no el acceso. Por ejemplo para 18 de edad como será true la expresión asignará el valor de "Permitir ingreso" y por consola tendremos:
+
+```
+Operadores Ternarios
+Permitir ingreso
+```
+
+Si la edad fuera 17 o menos nos asigna el valor de "No puede ingresar"
+
+<table><tbody><tr><td><p>Cambiamos el valor:</p><pre><code class="language-javascript">let edad = 17;
+let acceso = edad &gt; 17 ? 'Permitir ingreso' : 'No puede ingresar';
+console.log(acceso);</code></pre></td><td><p>Por consola:</p><pre><code class="language-">Operadores Ternarios
+No puede ingresar</code></pre></td></tr></tbody></table>
+
+Vemos como cambio el valor de asignación. Esto se parece mucho a los condicionales como el "if" que ya es control de flujo.
