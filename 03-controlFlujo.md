@@ -268,4 +268,101 @@ for (let indice in animales){
 1 Cabra
 2 Pato</code></pre></td></tr></tbody></table>
 
-.
+## Continue y break
+
+En algún momento podemos querer interrumpir un loop de los que ya vimos antes. O tambien querer salterar una iteración.
+
+Break nos permite salir del loop y seguir con el código siguiente. Continue nos permite saltar una iteracion. Por ejemplo si al ejecutar una lógica se obtiene un resultado nulo o undifine porque algo salio mal, podemos salir con break.
+
+<table><tbody><tr><td><pre><code class="language-javascript">let i = 0;
+while (i&lt;6){
+    i++;
+    if (i === 2){
+        continue;
+    };
+    console.log(i);
+};</code></pre></td><td><pre><code class="language-">1
+3
+4
+5
+6</code></pre></td></tr></tbody></table>
+
+Vemos en el código anterior que cada vez que entre al while porque el valor de i es menor de 6 va a sumar o incrementar i y luego mostrar el valor. Pero al agregar el condicional para i exactamente igual a 2 continuará a la siguiete iteración interrumpiendo todo el código siguiente al if() y seguirá con la nueva iteración. Por eso no muestra el 2 en la cosola.
+
+Podemos hacer la lógica para obtener valores pares con "continue" haciendo que cuando el resto de la divición por 2 sea distinto de cero (número impar) continue sin imprimir ese número al siguiente.
+
+<table><tbody><tr><td><pre><code class="language-javascript">i = 0;
+console.log('Valores Pares:');
+while (i&lt;10){
+    i++;
+    if (i % 2 != 0){
+        continue;
+    };
+    console.log(i);
+};</code></pre></td><td><pre><code class="language-">Valores Pares:
+2
+4
+6
+8
+10</code></pre></td></tr></tbody></table>
+
+Vemos que el incremento debe ser antes del "continue" ya que sino saltará el incremento y repetirá el salto indefinidamente creando un loop infinito.
+
+Para el caso del break cuando se implementa termina con el loop donde se encuentre. Por ejemplo el caso siguiente:
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('Para Break:');
+i = 0;
+while (i&lt;6){
+    i++;
+    if (i === 2){
+        continue;
+    } else if (i === 4){
+        break;
+    };
+    console.log(i);
+};</code></pre></td><td><pre><code class="language-">Para Break:
+1
+3</code></pre></td></tr></tbody></table>
+
+Si el valor de i es igual a 4 entonces detiene el loop while. Por ello por consola muestra solo hasta el tres salteando el 2 del "continue"
+
+## Switch
+
+Sirve para indicar al código donde queremos que se dirija dependiendo del valor de la variable. Es decir que evalua casos distintos de uso para valores especificos de la variable. La sintaxis es:
+
+```javascript
+let variable;
+switch (variable) {
+  case "valor1 de variable":
+  //Lógica para valor1
+  case "valor2 de variable":
+  //Lógica para valor2
+}
+```
+
+Para el valor 'valor1' que puede tomar la variable seguirá el primer caso ejecutando la lógica. Si cambia el valor y obtenemos 'valor2' seguirá el segundo caso. Podemos poner la cantidad de casos que queramos.
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('Switch');
+let accion = 'listar';
+switch (accion){
+    case 'listar':
+        console.log('Acción para listar');
+};</code></pre></td><td><pre><code class="language-">Switch
+Acción para listar</code></pre></td></tr></tbody></table>
+
+Agregamos el break luego de cada caso para que no siga ejecutando si no lo deseamos luego de encontrar el caso. Esto es porque usamos recursos innecesarios, pero tenemos la opción de seguir si lo deseamos.
+
+Finalmente como en "else" del "if" que no se cumplian las condiciones, en Switch podemos codificar que acción realizar o ejecutar si no se cumple ningún caso. Para ello usamos "default" con la misma sintaxis que "case" pero al final.
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('Switch');
+let accion = 'cambiar';
+switch (accion){
+    case 'listar':
+        console.log('Acción para listar');
+        break;
+    default:
+        console.log('No hay instrucción correcta');
+};</code></pre></td><td><pre><code class="language-">Switch
+No hay instrucción correcta</code></pre></td></tr></tbody></table>
+
+Esta lógica se puede realizar con if else pero el código no es prolijo y no se reduce. También tener en cuenta que hay librerías como "Redux" que usan el Switch. Para una o dos condiciones usar if else, para más de dos condiciones usar el Switch.
