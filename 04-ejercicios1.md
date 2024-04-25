@@ -153,7 +153,7 @@ impar 5
 impar 7
 impar 9</code></pre></td></tr></tbody></table>
 
-## Ejercicio 05
+## Ejercicio 05 - Prueba Técnica
 
 Vamos a buscar el número mayor y el número nemor de un arreglo de números. Estamos buscando dos elementos, entonces tendremos dos variables. Una variable busca al mayor y la otra buscar al menor "let mayor" y "let menor". Pero queremos que empiecen con el valor del primer elemento del arreglo:
 
@@ -163,6 +163,12 @@ let mayor = arr[0]; // Primer valor
 ```
 
 Luego tenemos que iterar el arreglo para comparar el valor de las variables. Por ello usamos "for-of" para recorrer los valores de los elementos. La lógica que vamos a usar con el operador ternario, realizando una camparación booleana, luego si extiste un resultado verdadero "true" realiza la primer expresión; pero si es "false" realiza la expresión siguiente a los dos puntos ":"
+
+```javascript
+var = condicion(true/false) ? (valor en true) : (valor en false);
+```
+
+Quedando para el ejercicio:
 
 ```javascript
 for (num of arr) {
@@ -199,3 +205,416 @@ let extremo = getMayorMenor(array2);
 console.log(extremo);</code></pre></td><td><pre><code class="language-">[ -101, 46 ]</code></pre></td></tr></tbody></table>
 
 ## Ejercicio 06
+
+En este ejercicio vamos a buscar la cantidad de número negativos o positivos en un arreglo. Tomaremos los arreglos del ejercicio anterior.
+
+// Arreglo
+
+```javascript
+let array1 = [2, 5, 7, 15, -5, -100, 55];
+let array2 = [7, 25, -6, 12, -5, -101, 46];
+```
+
+Para la función de conteo usaremos una variable interna de conteo "cantPos" que irá contando los números positivos. Deberemos iterar el arreglo que tenga como parámetro obteniendo el valor de elemento, para ello usamos el "for-of". Dentro del "for-of" debo preguntar si el valor es mayor que cero y de ser true la respuesta, debe sumar una unidad al contador "cantPos". Finalmente cuando termine la iteración me debe retornar el valor de "cantPos".
+
+<table><tbody><tr><td><pre><code class="language-javascript">function cuantosPosit(arr) {
+    let cantPos = 0;
+    for (let num of arr) {
+        if (num &gt; 0) {
+            cantPos++;
+        };
+    };
+    return cantPos;
+};
+resultado = cuantosPosit(array1);
+console.log('Cantidad de números positivos arreglo 1', resultado);
+resultado = cuantosPosit(array2);
+console.log('Cantidad de números positivos arreglo 2', resultado);</code></pre></td><td><pre><code class="language-">Cantidad de números positivos arreglo 1: 5
+Cantidad de números positivos arreglo 2: 4</code></pre></td></tr></tbody></table>
+
+## Ejercicio 07
+
+Vamos a crear una calculadora de impuestos, que devuelva el precio del producto más el impuesto. Por lo que tendremos tres variables el precio, el impuesto y el resultado.
+
+```javascript
+// Variables
+let precio;
+let impuesto;
+let valor;
+```
+
+Debemos incrementar el precio en el porcentaje del impuesto. Y asignarlo al valor final.
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Variables
+let precio;
+let impuesto;
+let valor;
+//Función impuesto
+function valorImp(precio, impuesto) {
+    valor = precio * (1 + impuesto);
+    return valor;
+};
+valor = valorImp(10, 0.15)
+console.log('El valor con impuesto para', precio,'es:',valor);</code></pre></td><td><pre><code class="language-">El valor con impuesto para undefined es: 11.5</code></pre></td></tr></tbody></table>
+
+## Ejercicio 08 (for-of)
+
+Este tipo de ejercicio se utiliza mucho en la realidad. Lo que hace es crear un arreglo de objetos o arreglos. Donde asigna un indice y el objeto o arreglo. Es muy útil ya que se utiliza para registro de ususarios.
+
+Creamos un arreglo con 3 objetos que tienen dos propiedades el id y el nombre cada uno.
+
+```javascript
+let array = [
+  {
+    id: 1,
+    name: "Nicolas",
+  },
+  {
+    id: 2,
+    name: "Felipe",
+  },
+  {
+    id: 3,
+    name: "Chanchito",
+  },
+];
+```
+
+Crearemos la función para crear un arreglo de arreglos, los arreglos serán de dos partes una que es el número identificatorio primero y luego el objeto. Quedando como resultado final:
+
+```javascript
+let pares = [
+  [1, { id: 1, name: "Nicolas" }],
+  [2, { id: 2, name: "Felipe" }],
+  [3, { id: 3, name: "Chanchito" }],
+];
+```
+
+Pasamos de un Objeto JSON a un arreglo, por eso es tan utilizado ya que las consultas a los servidores Express con MongoDB devuelve el controlador un JSON.
+
+La lógica que usaremos será con un for-of que recorra el arreglo que le pasamos por parámetro y que agregue un nuevo elemento al arreglo de pares. Debemos inicializar al arreglo pares como vacio "let pares = \[\];" para que entienda que puede agregar el elemento a la variable.
+
+```javascript
+let array1 = [
+  { id: 1, name: "Nicolas" },
+  { id: 2, name: "Felipe" },
+  { id: 3, name: "Chanchito" },
+];
+let pares = [];
+```
+
+Para ir agregando elementos podemos igualar el indice con un contador "i" que se incremente con cada iteración empezando por el valor de indice 0. Definimos una variable "obj" que tomará el valor de cada objeto en la iteración de "arr"
+
+```javascript
+function toPairs(arr) {
+  let i = 0;
+  for (let obj of arr) {
+    i++;
+  }
+}
+```
+
+Ahora para agregar un nuevo elemento al arreglo podemos usar la asignación por igualdad o el push(). Con la igualdad nos aseguramos que reescriba o agrege el elemento por indice, con push() agregará al final de lo que ya existe, pudiendo duplicar valores si ya tenía un valor previo.
+
+<table><tbody><tr><td><pre><code class="language-javascript">function toPairs(arr) {
+    let i = 0;
+    for (let obj of arr) {
+        pares[i] = [i + 1, obj];
+        i++;
+    };
+    return pares;
+};
+pares = toPairs(array1);
+console.log(pares);</code></pre></td><td><pre><code class="language-">[
+  [ 1, { id: 1, name: 'Nicolas' } ],
+  [ 2, { id: 2, name: 'Felipe' } ],
+  [ 3, { id: 3, name: 'Chanchito' } ]
+]</code></pre></td></tr></tbody></table>
+
+Si tenemos un arreglo con id desordenados, _**nos dará un nuevo arreglo de pares que no respeta los id**_, sino que asigna nuevos segun el orden:
+
+<table><tbody><tr><td><pre><code class="language-javascript">let array2 = [
+    { id: 20, name: 'Ivan' },
+    { id: 3, name: 'Pedro' },
+    { id: 105, name: 'Yamila' },
+    { id: 11, name: 'Juan' }
+];
+let resultado;
+function toPairs(arr) {
+    let i = 0;
+    let pares = [];
+    for (let obj of arr) {
+        pares[i] = [i + 1, obj];
+        i++;
+    };
+    return pares;
+};
+console.log('Para arreglo 2:');
+resultado = toPairs(array2);
+console.log(resultado);</code></pre></td><td><pre><code class="language-">Para arreglo 2:
+[
+  [ 1, { id: 20, name: 'Ivan' } ],
+  [ 2, { id: 3, name: 'Pedro' } ],
+  [ 3, { id: 105, name: 'Yamila' } ],
+  [ 4, { id: 11, name: 'Juan' } ]
+]</code></pre></td></tr></tbody></table>
+
+Los nuevos id van de acuerdo a la cantidad empezando por el 1 hasta 4 sin considerar el id como propiedad de los objetos del arreglo original. Esto puede ser útil en una ApiRest que nos ensamble una base de datos con una Api que tiene otro tipo de configuración de id's para los datos.
+
+## Ejercicio 08 (for-in) Más Usado
+
+Vamos a utilizar el loop "for-in" para que respete los id que ya tiene cada objeto dentro del arreglo de objetos. Este es otro tipo de requerimientos más utilizados ya que permite llamar luego a cada objeto por el id ya conocido con el que se envía de la base de datos.
+
+Creamos la función nueva para respetar el id "toPairsId()" que tendrá como parametro un arreglo que le pasemos y denomina como "arr". Luego definiremos una arreglo que se irá construyendo inicialmente vacio "let pares = \[\];" y retornará este arreglo nuevo.
+
+```javascript
+// Respetando el ID con "for-in"
+function toPairsId(arr) {
+  let pares = [];
+  return pares;
+}
+```
+
+Usaremos el "for-in" que primero asignará el lvalor del indice que va a iterar a la varaible "idx" en el arreglo "arr" siendo "for (idx in arr){};". Dentro del for queremos que cree por cada vez un arreglo que tendrá dos elementos, uno el "id" que ya existe y el otro el objeto completo. Entonces es primero una propiedad del objeto (elemento.id) y luego el objeto completo (elemento). Por ello creamos una variable interna del "for-in" que irá asigando cada arreglo u objeto a ella según el indice por el que esté pasando "idx"
+
+```javascript
+function toPairsId(arr) {
+  let pares = [];
+  for (idx in arr) {
+    let elemento = arr[idx];
+  }
+  return pares;
+}
+```
+
+Ahora agregaremos al arreglo "pares" los datos en el fomato que queremos "`[elemento.id,elemento]`":
+
+```javascript
+// Respetando el ID con "for-in"
+function toPairsId(arr) {
+  let pares = [];
+  for (idx in arr) {
+    let elemento = arr[idx];
+    pares[idx] = [elemento.id, elemento];
+  }
+  return pares;
+}
+```
+
+Vemos como nos devuelve el nuevo arreglo con los id´s según fueron asigandos en el arreglo original.
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Respetando el ID con "for-in"
+function toPairsId(arr){
+    let pares = [];
+    for (idx in arr) {
+        let elemento = arr[idx];
+        pares[idx] = [elemento.id,elemento];
+    };
+    return pares;
+};
+console.log('Para arreglo 1:');
+resultado = toPairsId(array1);
+console.log(resultado);
+console.log('Para arreglo 2:');
+resultado = toPairsId(array2);
+console.log(resultado);</code></pre></td><td><pre><code class="language-">Para arreglo 1 "for-in":
+[
+  [ 1, { id: 1, name: 'Nicolas' } ],
+  [ 2, { id: 2, name: 'Felipe' } ],
+  [ 3, { id: 3, name: 'Chanchito' } ]
+]
+Para arreglo 2 "for-in":
+[
+  [ 20, { id: 20, name: 'Ivan' } ],
+  [ 3, { id: 3, name: 'Pedro' } ],
+  [ 105, { id: 105, name: 'Yamila' } ],
+  [ 11, { id: 11, name: 'Juan' } ]
+]</code></pre></td></tr></tbody></table>
+
+Para la salida del arreglo 2 "array2" nos respetó el id original.
+
+## Ejercio 09
+
+Vamos a crear un arreglo de objetos a partir de un arreglo de pares que tengamos para por ejemplo poder enviar al servidor. Por lo que partimos de los dos arreglos pares del ejercicio anterior. Pero no contiene un "id" por lo que en base al número que tiene asignado debemos crear la propiedad "id : numero"
+
+<table><tbody><tr><td><pre><code class="language-javascript">let arrPar1 = [
+    [ 1, { name: 'Nicolas' } ],
+    [ 2, { name: 'Felipe' } ],
+    [ 3, { name: 'Chanchito' } ]
+  ];</code></pre></td><td><pre><code class="language-javascript">let arrPar2 = [
+    [ 20, { name: 'Ivan' } ],
+    [ 3, { name: 'Pedro' } ],
+    [ 105, { name: 'Yamila' } ],
+    [ 11, { name: 'Juan' } ]
+  ];</code></pre></td></tr></tbody></table>
+
+Vamos necesitar volver a armar un arreglo de objetos con dos propiedades que son el "id" y "name" y usaremos el loop de "for-in". Las variables que contienen los valores de las propiedades serán internas de la función tipo let. En cada iteración iremos agregando a nuestro nuevo arreglo cada elemento, para ello usaremos una variable tipo arreglo interna a la función "let arreglo = \[\];" inicalmente vacia.
+
+```javascript
+function toCollection(arr) {
+  let arreglo = [];
+  let id;
+  let name;
+  return arreglo;
+}
+```
+
+La función debe recibir por lo menos el parametro de arreglo que contenga en primer lugar el número que será el "id" y luego el "name", esta será "arr". El loop "for-in" tendrá una variable que será cada indice de "arr" llamada por convención "idx"
+
+```javascript
+for (idx in arr) {
+}
+```
+
+Para cada indice correspondiente "idx" obtendremos el id que es el primer valor siendo "id = arr\[idx\]\[0\];" y el nombre de igual manera será para el segundo indice que es el 1 siendo "name = arr\[idx\].name;" Finalmente con los valores definidos agregaremos un elemento al nuevo objeto:
+
+```javascript
+function toCollection(arr) {
+  let arreglo = [];
+  let id;
+  let name;
+  for (idx in arr) {
+    id = arr[idx][0];
+    name = arr[idx][1].name;
+    arreglo[idx] = { id, name };
+  }
+  return arreglo;
+}
+```
+
+Realizamos las llamadas a la función pasando los dos casos:
+
+<table><tbody><tr><td><pre><code class="language-javascript">let resultado;
+function toCollection(arr) {
+    let arreglo = [];
+    let id;
+    let name;
+    for (idx in arr) {
+        id = arr[idx][0];
+        name = arr[idx][1].name;
+        arreglo[idx] = { id, name };
+    };
+    return arreglo;
+};
+resultado = toCollection(arrPar1);
+console.log(resultado);
+resultado = toCollection(arrPar2);
+console.log(resultado);</code></pre></td><td><pre><code class="language-">[
+  { id: 1, name: 'Nicolas' },
+  { id: 2, name: 'Felipe' },
+  { id: 3, name: 'Chanchito' }
+]
+[
+  { id: 20, name: 'Ivan' },
+  { id: 3, name: 'Pedro' },
+  { id: 105, name: 'Yamila' },
+  { id: 11, name: 'Juan' }
+]</code></pre></td></tr></tbody></table>
+
+## Ejercicio 10
+
+Crearemos una función que al pasarle un número N crea un arreglo con N elementos que serán los números desde 1 a N. También deberemos verificar que el número que pasemos sea positivo.
+
+```javascript
+let num;
+let arrNum = [];
+function crearArrayN(num) {
+  let arr = [];
+  let i = 0;
+  if (num >= 0) {
+  } else {
+    return ["Error: número menor de cero"];
+  }
+}
+```
+
+Dentro del "if" ya que el argumento "num" es mayor que cero deberemos realizar un loop que inserte un número al arreglo de uno en uno tantas veces sea necesario hasta alcanzar el valor de N.
+
+```javascript
+    if (num >= 0) {
+        while (i < num) {
+            arr[i] = i + 1;
+            i++;
+        };
+        return arr;
+```
+
+Quedando para valores de "num" en 15 y -10:
+
+<table><tbody><tr><td><p>Para num = 15:</p><pre><code class="language-javascript">let num;
+let arrNum = [];
+function crearArrayN(num) {
+    let arr = [];
+    let i = 0;
+    if (num &gt;= 0) {
+        while (i &lt; num) {
+            arr[i] = i + 1;
+            i++;
+        };
+        return arr;
+    } else {
+        return ['Error: número menor de cero']
+    };
+};
+num = 15;
+arrNum = crearArrayN(num);
+console.log(arrNum);</code></pre></td><td><pre><code class="language-">[
+   1,  2,  3,  4,  5,  6,
+   7,  8,  9, 10, 11, 12,
+  13, 14, 15
+]</code></pre></td></tr><tr><td><p>Para num = -10</p><pre><code class="language-javascript">num = -10;
+arrNum = crearArrayN(num);
+console.log(arrNum);</code></pre></td><td><pre><code class="language-">[ 'Error: número menor de cero' ]</code></pre></td></tr></tbody></table>
+
+Vamos a agregar además el loop For para el mismo número para tener otra alternativa de lógica.
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Arreglo de N números loop While
+let num;
+let arrNum = [];
+function crearArrayN(num) {
+    let arr = [];
+    let i = 0;
+    if (num === 0) {
+        arr[0] = 1;
+        return arr;
+    } else if (num &gt;= 0) {
+        while (i &lt; num) {
+            arr[i] = i + 1;
+            i++;
+        };
+        return arr;
+    } else {
+        return ['Error: número menor de cero']
+    };
+};
+num = 10;
+arrNum = crearArrayN(num);
+console.log('Metodo While');
+console.log('Para número: ',num);
+console.log(arrNum);
+// Arreglo de N números loop For
+function crearArrayFor (num) {
+    let arr = [];
+    if (num &lt;= 0){
+        return arr = ['Error, número menor o igual a 0'];
+    };
+    for (let i = 0; i &lt; num ; i++){
+        arr[i] = i + 1;
+    };
+    return arr;
+};
+arrNum = crearArrayFor(num);
+console.log('Metodo For');
+console.log('Para número: ',num);
+console.log(arrNum);</code></pre></td><td><pre><code class="language-">Metodo While
+Para número:  10
+[
+  1, 2, 3, 4,  5,
+  6, 7, 8, 9, 10
+]
+Metodo For
+Para número:  10
+[
+  1, 2, 3, 4,  5,
+  6, 7, 8, 9, 10
+]</code></pre></td></tr></tbody></table>
