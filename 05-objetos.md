@@ -541,13 +541,123 @@ console.log(' ');</code></pre></td><td><pre><code class="language-">[key, value]
 
 Devolviendo un arreglo con arreglos pares de key/value y en los metodos indicando que contiene una función.
 
-### Listar Codigo viejo y Codigo nuevo
+### Listar Código viejo y Código nuevo
 
 Las últimas dos formas de listar con el "for-of" usando el Object.keys(objeto); y con Object.entries(object); son los métodos antiguos y debe haber mucho codigo para mantener que tiene este formato. Y lo que debemos usar es el actual con el "for-in":
 
 <table><tbody><tr><td><i><strong>Código Viejo</strong></i></td><td><i><strong>Código nuevo</strong></i></td></tr><tr><td><p>Con for-of:</p><pre><code class="language-javascript">for (let llave of Object.keys(punto)){
     console.log(llave, punto[llave]);
 };</code></pre><p>Con .entries():</p><pre><code class="language-javascript">const keyValue = Object.entries(punto);
-console.log(keyValue);</code></pre><p>&nbsp;</p></td><td><pre><code class="language-javascript">for (let llave in punto) {
+console.log(keyValue);</code></pre></td><td><pre><code class="language-javascript">for (let llave in punto) {
     console.log([llave, punto[llave]]);
 };</code></pre></td></tr></tbody></table>
+
+## Clonar Objetos - Object.assaign()
+
+Para poder clonar objetos y no clonar la dirección al mismo valor. Es decir de crear un objeto igual a otro pero con su dirección y valores propios. Para ello utilizaremos un método del Object natico que es Object.assign(obj1, {obj2, prop}) donde asigan los valores de un objeto "obj2" a otro objeto "obj1" agregando las nuevas propiedades.
+
+Vamos a agregar las propiedades de "punto" a "punto3D", creamos primero los dos objetos:
+
+```javascript
+let punto3D = { z: 5 };
+let punto = {
+  x: 10,
+  y: 12,
+};
+```
+
+Ahora vamos a asiganar al objeto de "punto3D" las propiedades de "x" e "y":
+
+<table><tbody><tr><td><pre><code class="language-javascript">let punto3D = {z : 5};
+let punto = {
+    x : 10,
+    y : 12,
+};
+Object.assign(punto3D, punto,);
+console.log(punto3D);</code></pre></td><td><pre><code class="language-">{z: 5, x: 10, y: 12}</code></pre></td></tr></tbody></table>
+
+Si queremos agregar un método de dibujar podemos seguir agregando:
+
+<table><tbody><tr><td><pre><code class="language-javascript">let dibujar = {
+    dibujar() {
+        console.log('Dibujando');
+    },
+};
+Object.assign(punto3D, dibujar);
+console.log(punto3D);</code></pre></td><td><pre><code class="language-">{z: 5, x: 10, y: 12, dibujar: ƒ}</code></pre></td></tr></tbody></table>
+
+Podemos crear un objeto que tome los valores de punto, la nueva coordenada de z:12 y además agregar un método.
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('Objecto con varios clonados');
+let objConstruido = Object.assign(
+    {},
+    punto,
+    { z: 12 },
+    {
+        dibujar() {
+            console.log('Dibujando..');
+        }
+    },
+);
+console.log(objConstruido);</code></pre></td><td><pre><code class="language-">Objecto con varios clonados
+10-clones.js:35 {x: 10, y: 12, z: 12, dibujar: ƒ}</code></pre></td></tr></tbody></table>
+
+### Resumen
+
+Podemos ir agregando objetos, propiedades o métodos con Object.assign() colocando entre los parentesis primero donde se va a clonar y luego separado por comas los objetos propiedades o métodos separados entre comas. Object.assing(objetoResultado, obj2, {prop : val} , {metodo(){acción}}, obj3); _**Si una propiedad se repite en alguno de los objetos, tomará como último valor el que esté más a la derecha**_.
+
+### Copia método let copia = {... objeto};
+
+Si queremos compiar con el metodo de Object.assing({}, objeto) sería un metodo relativamente viejo ya que es del 2015. Hay un método abreviado para realizar la copia de las propiedades de un objeto a una nueva referencia en otro objeto y es con las llaves {} tres puntos y seguido el objeto a copiar:
+
+<table><tbody><tr><td>Método nuevo</td><td>Método viejo</td></tr><tr><td><pre><code class="language-javascript">// Cópia objeto {...objeto}
+let punto3 = {...punto};
+console.log('Objetos clonados con {...object}:');
+console.log(punto, punto3);
+// Cambiar valor propiedad de uno
+punto3.x = 17;
+punto3.y = 8;
+console.log('Objeto modificado:');
+console.log(punto, punto3);
+console.log(' ');</code></pre></td><td><pre><code class="language-javascript">// Cópia objeto Object.assing()
+let punto2 = Object.assign({}, punto);
+console.log('Objetos clonados con .assing():');
+console.log(punto, punto2);
+// Cambiar valor propiedad de uno
+punto2.x = 15;
+punto2.y = 5;
+console.log('Objeto modificado:');
+console.log(punto, punto2);
+console.log(' ');</code></pre></td></tr><tr><td><p>Por consola:</p><pre><code class="language-">Objetos clonados con {...object}:
+{x: 10, y: 12} {x: 10, y: 12}
+Objeto modificado:
+{x: 10, y: 12} {x: 17, y: 8}</code></pre></td><td><p>Por consola:</p><pre><code class="language-">Objetos clonados con .assing():
+{x: 10, y: 12} {x: 10, y: 12}
+Objeto modificado:
+{x: 10, y: 12} {x: 15, y: 5}</code></pre></td></tr></tbody></table>
+
+### Método Antiguo "for in"
+
+Hay un método antiguo que debemos saber ya que se puede encontrar con código antiguo que se deba dar soporte. Esto es con el "for-in" asignar a un objeto vacío una por una las llaves/valor del objeto que queremos copiar.
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Copia Antigua For-in
+console.log('Copia por For-in');
+let punto4 = {};
+for (let llave in punto){
+    punto4[llave] = punto[llave];
+};
+console.log('Objetos clonados con for-in');
+console.log(punto, punto4);
+console.log(' ');
+// Cambiar valor propiedad de un obj
+punto4.x= 20;
+punto4.y= 6;
+console.log('Objeto modificado:');
+console.log(punto, punto4);</code></pre></td><td><p>Por consola:</p><pre><code class="language-">Copia por For-in
+Objetos clonados con for-in
+{x: 10, y: 12} {x: 10, y: 12}
+
+Objeto modificado:
+{x: 10, y: 12} {x: 20, y: 6}</code></pre></td></tr></tbody></table>
+
+.
