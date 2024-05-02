@@ -1,3 +1,6 @@
+console.log('Tema: FUNCTION');
+console.log(' ');
+
 console.log('Método .call({this},arg)');
 function Punto(x, y) {
     this.x = x;

@@ -1,4 +1,5 @@
-console.log('Listar Propiedades');
+console.log('Tema: LISTAR KEY-VALUE');
+console.log(' ');
 
 const punto = {
     x: 10,

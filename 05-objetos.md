@@ -657,7 +657,321 @@ console.log(punto, punto4);</code></pre></td><td><p>Por consola:</p><pre><code c
 Objetos clonados con for-in
 {x: 10, y: 12} {x: 10, y: 12}
 
-Objeto modificado:
-{x: 10, y: 12} {x: 20, y: 6}</code></pre></td></tr></tbody></table>
+</code></pre><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p><code>Objeto modificado:</code><br><code>{x: 10, y: 12} {x: 20, y: 6}</code></p></td></tr></tbody></table>
 
-.
+## Privado - Público
+
+Cuando creamos un objeto con la función contructor utilizando la palabra reservada "this" podemos determinar que una propiedad o método sea privado, es decir que solo lo pueda utilizar el objeto y no poder ser utilizado por otro objeto o función. Tenemos el siguiente objeto:
+
+```javascript
+// Función constructora
+function Usuario() {
+  this.name = "Ivan";
+  this.log = function () {
+    console.log("Logging..");
+  };
+  this.guardar = function () {
+    this.log();
+    console.log("Guardando...");
+  };
+}
+
+// Construir Objeto
+const usuario1 = new Usuario();
+```
+
+Si por error un programador cambiara el método de log() cambiaría para todos los objetos que se esten creando desde Usuario(); Con lo que sería un gran problema ya que no podría ingresar ninguno. Vemos primero que el guardado llama al método log():
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Construir Objeto
+console.log('Objeto usuario1:');
+let usuario1 = new Usuario();
+console.log(usuario1);
+usuario1.guardar();
+console.log(' ');</code></pre></td><td><pre><code class="language-">Objeto usuario1:
+Usuario&nbsp;{name: 'Ivan', log: ƒ, guardar: ƒ}
+Logging..
+Guardando...</code></pre></td></tr></tbody></table>
+
+Pero si alguien cambia en ususario el metoto log() por error:
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Cambiara método log()
+usuario1.log = function(){
+    console.log('Lala');
+};
+usuario1.guardar();</code></pre></td><td><p>Por consola:</p><pre><code class="language-">Lala
+Guardando...</code></pre></td></tr></tbody></table>
+
+Que es un resultado y comportamiento no deseado.
+
+Para que esto no suceda es que se puede definir como privado uno o más métodos, debemos definirlos como una variable interna "let" encapsulando. Y al ser una variable interna solo se podrá utilizar por el constructor y el objeto. No podremos modificarla ya que no existe fuera de la función constructora por ser un "let".
+
+```javascript
+// Método privado
+function Usuario2() {
+  this.name = "Ivan";
+  let log = function () {
+    console.log("Logging..");
+  };
+  this.guardar = function () {
+    log();
+    console.log("Guardando...");
+  };
+}
+```
+
+Vemos que tenemos una variable "let log" que es el método ya que podiamos asignar una función a una variable por ser un objeto de primer grado. Y será utilizada por el método que tenemos acceso de .guardar():
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Crear un objeto con método privado
+const usuario2 = new Usuario2();
+console.log(usuario2);
+usuario2.guardar();</code></pre></td><td><pre><code class="language-">Usuario2&nbsp;{name: 'Ivan', guardar: ƒ}
+Logging..
+Guardando...</code></pre></td></tr></tbody></table>
+
+Vemos que al llamar al método de guardar() internamente se ejecuta log(). También vemos que el objeto construido no muestra la variable "log" por lo que no puede ser accedida desde fuera. Solo se utilizará internamente cuando se llamar al métod guardar();
+
+Podríamos definir la función "function log(){}," sin declararla como una variable let pero por convención se declara como un método al ser una función constructora.
+
+<table><tbody><tr><td><pre><code class="language-javascript">function Usuario2(){
+    this.name = 'Ivan';
+    function log(){
+        console.log('Logging..');
+    };
+    this.guardar = function (){
+        log();
+        console.log('Guardando...');
+    };
+};
+const usuario2 = new Usuario2();
+console.log(usuario2);
+usuario2.guardar();</code></pre></td><td><pre><code class="language-">Usuario2&nbsp;{name: 'Ivan', guardar: ƒ}
+Logging..
+Guardando...</code></pre></td></tr></tbody></table>
+
+### Resumen
+
+Podemos definir variables o métodos privados a los que no podemos acceder desde fuera del obejto pero son de uso internos, para ellos los declaramos como variables "let" o "const" y no como una propiedad "this"
+
+<table><tbody><tr><td><pre><code class="language-javascript">function Usuario3() {
+    const id = 1;
+    this.name = 'Ivan';
+    let log = function () {
+        console.log('Logging.. usuario id:', id);
+    };
+    this.guardar = function () {
+        log();
+        console.log('Guardando... usuario id:', id);
+    };
+};
+const usuario3 = new Usuario3();
+console.log(usuario3);
+usuario3.guardar();</code></pre></td><td><pre><code class="language-">Usuario3&nbsp;{name: 'Ivan', guardar: ƒ}
+Logging.. usuario id: 1
+Guardando... usuario id: 1</code></pre></td></tr></tbody></table>
+
+## Objeto MATH
+
+Vamos a ver objetos que ya vienen incluidos en JavaScript que tienen sus propiedades y métodos. El primero que veremos en el objeto Math. Que tiene integrado los métodos de calculos cientificos. Para verlos en VSC al escribir "Math." lista todos los métodos que contiene.
+
+Para consultar como utilizar cada método podemos ir a la página:
+
+[https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Math](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Math)
+
+Donde se encuentra la documentación.
+
+### Redondear Número
+
+Como por ejemplo que devuelva em máximo entero anterior a un número con decimales (redondear para abajo).
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Número entero
+let x = 12.3;
+let entero = Math.floor(x)
+console.log('El entero de', x, 'es:', entero);</code></pre></td><td><pre><code class="language-">El entero de 12.3 es: 12</code></pre></td></tr></tbody></table>
+
+También podriamos redondear un valor utilizando los metodos de Math.trunc(x) que deja solo la parte decimal de un número, Math.floor(x) que devuelve el entero mayor menor (redondea para abajo) y Math.ceil(x) (redondeo para arriba) que devuelve el entero menor mayor:
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Redondear valor
+let y = 12.7;
+function redondear(num) {
+    if ((num - Math.trunc(num)) &lt; 0.5) {
+        let ent = Math.floor(num);
+        console.log('El redondeo de', num, 'es:', ent);
+    } else {
+        let ent = Math.ceil(num);
+        console.log('El redondeo de', num, 'es:', ent);
+    };
+};
+redondear(y);</code></pre></td><td><pre><code class="language-">El redondeo de 12.7 es: 13</code></pre></td></tr></tbody></table>
+
+Daremos varios valores para ver como funciona el redondeo:
+
+<table><tbody><tr><td><pre><code class="language-javascript">redondear(y);
+redondear(15.3);
+redondear(7.5);
+redondear(21.8);
+redondear(1.4);</code></pre></td><td><pre><code class="language-">El redondeo de 12.7 es: 13
+El redondeo de 15.3 es: 15
+El redondeo de 7.5 es: 8
+El redondeo de 21.8 es: 22
+El redondeo de 1.4 es: 1</code></pre></td></tr></tbody></table>
+
+Pero el objeto Math ya tiene un método _**Math.round()**_ que redondea el número a un entero:
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('Math.round()');
+function round(n) {
+    let round = Math.round(n);
+    console.log('El redondeo de', n, 'es:', round);
+};
+round(12.7);
+round(13.4);
+round(0.7);</code></pre></td><td><pre><code class="language-">Math.round()
+El redondeo de 12.7 es: 13
+El redondeo de 13.4 es: 13
+El redondeo de 0.7 es: 1</code></pre></td></tr></tbody></table>
+
+### Valor absoluto
+
+Para obtener el valor absoluto de un número podemos usar de los metodos del objeto Math el .abs():
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Valor absoluto
+let c = -12;
+let abs = Math.abs(c);
+console.log('El valor absoluto de', c, 'es:', abs);</code></pre></td><td><pre><code class="language-">El valor absoluto de -12 es: 12</code></pre></td></tr></tbody></table>
+
+### Números aleatorios (min - max)
+
+Con Math.random() podemos generar números aleatorios. Pero lo que devuelve es un número entre 0 y 1 y luego nosotros debemos convertirlo en el rango que queremos. por ejemplo enteros entre 0 y 100:
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('Entre 0 y 100:');
+function buscarAle(){
+    let aleat = Math.random() * 100;
+    let numEnt = Math.trunc(aleat);
+    console.log(numEnt);
+};
+buscarAle();
+buscarAle();
+buscarAle();</code></pre></td><td><p>Salida:</p><p>Entre 0 y 100:<br>51<br>37<br>79</p></td><td><p>Salida:</p><p>Entre 0 y 100:<br>33<br>18<br>37</p></td><td><p>Salida:</p><p>Entre 0 y 100:<br>46<br>81<br>94</p></td></tr></tbody></table>
+
+Cada vez que actualizamos el explorador vuele a ejecutar el código de JavaScript y como es aleatorio cambian los valores.
+
+Si queremos poder elegir el rango debemos crear una funcion que tome el mínimo y el máximo entro los que queremos que nos dé el valor aleatorio.
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('Min y Max:');
+let min;
+let max;
+function getRandom(min, max){
+    let aleat = Math.random() * (max - min) + min;
+    let numEnt = Math.trunc(aleat)
+    console.log(numEnt);
+};</code></pre></td><td><pre><code class="language-">Min y Max:
+Valor entre:  10 20
+12</code></pre></td><td><pre><code class="language-">Min y Max:
+Valor entre:  10 20
+14</code></pre></td></tr></tbody></table>
+
+Si cambiamos el mínimo y máximo
+
+<table><tbody><tr><td><p>min = 0;</p><p>max = 10;</p><p>console.log('Valor entre: ', min,max);</p><p>getRandom(min, max);</p><p>console.log(' ');</p></td><td>Valor entre: &nbsp;0 10<br>2</td><td>Valor entre: &nbsp;0 10<br>5</td></tr></tbody></table>
+
+O incluso entre las tres posibilidades de 1 - 2 - 3 debemos elejir entre 1 y 4 asi incluye el 3 ya que tiene que dar valores entre 3 y 3.999.. que recorte en 3:
+
+<table><tbody><tr><td><pre><code class="language-javascript">min = 1;
+max = 4;
+console.log('Valor entre: ', min,max-1);
+getRandom(min, max);
+console.log(' ');</code></pre></td><td><pre><code class="language-">Entre:  1 3
+3</code></pre></td><td><pre><code class="language-">Entre:  1 3
+2</code></pre></td><td><pre><code class="language-">Entre:  1 3
+1</code></pre></td></tr></tbody></table>
+
+## Objeto Date
+
+Otro obejto muy importante es el Date ya que nos permite mostrar o realizar acciones con las fechas. Para poder empezar debemos crear un objeto que muestre la fecha actual.
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Obejto Ahora
+const ahora = new Date();
+console.log(ahora);</code></pre></td><td><pre><code class="language-">Thu May 02 2024 19:36:29 GMT+0200 (hora de verano de Europa central)</code></pre></td></tr></tbody></table>
+
+El constructor de obejtos Date() nos permite pasarle el valor de una fecha como argumento donde tendremos en la sintaxis:
+
+```javascript
+// Crear Fecha
+const fecha = new Date(año, mes base 0, día, hora, minutos, segundo)
+```
+
+La base cero del mes es que enero es 0 y diciembre es 11. No empieza en 1 al 12 sino de 0 al 11. Creamos una fecha:
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Crear Fecha
+const fecha = new Date(1983, 11, 2, 1, 30, 0);
+console.log(fecha);</code></pre></td><td><pre><code class="language-">Fri Dec 02 1983 01:30:00 GMT+0100 (hora estándar de Europa central)</code></pre></td></tr></tbody></table>
+
+### Formatos fecha .to...()
+
+Para cambiar el formato de las fechas tenemos que acceder a los métodos de los obejtos creados en este caso para los objetos de "ahora" y el obejto de "fecha". Los métodos para formatear empiezan con ".to.." y podemos buscar documentación en:
+
+[https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Date](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Date)
+
+Si queremos dar un formato internacional podemos usar el metodo .toDateString()
+
+<table><tbody><tr><td><pre><code class="language-javascript">// Formato toDateString()
+console.log('.toDateString():');
+console.log(ahora.toDateString());
+console.log(fecha.toDateString());</code></pre></td><td><pre><code class="language-">.toDateString():
+Thu May 02 2024
+Fri Dec 02 1983</code></pre></td></tr></tbody></table>
+
+El formato importante para _**pasar fechas a un servidor**_ desde el cliente o r***ecibir desde el servidor*** es el _**.toISOString()**_
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('.toISOString():');
+console.log(ahora.toISOString());
+console.log(fecha.toISOString());
+console.log(' ');</code></pre></td><td><pre><code class="language-">.toISOString():
+2024-05-02T18:06:54.976Z
+1983-12-02T00:30:00.000Z</code></pre></td></tr></tbody></table>
+
+Este formato es el más facil de almacenar y de transformar a otras fechas.
+
+Para ver solo el horario usamos el .toTimeString()
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('.toTimeString():');
+console.log('Mostrar solo la hora');
+console.log(ahora.toTimeString());
+console.log(fecha.toTimeString());
+console.log(' ');</code></pre></td><td><pre><code class="language-">.toTimeString():
+Mostrar solo la hora
+20:25:21 GMT+0200 (hora de verano de Europa central)
+01:30:00 GMT+0100 (hora estándar de Europa central)</code></pre></td></tr></tbody></table>
+
+### Formatos fecha .get...()
+
+Con los métodos que empiezan con .get...() podemos obtener dentro de un obejto como "ahora" o "fecha" valores particulares y asi construir el formato que necesitemos para mostrar.
+
+<table><tbody><tr><td colspan="2">Para .getDate() devuelve el número del día del mes</td></tr><tr><td><pre><code class="language-javascript">console.log('.getDate():');
+console.log(ahora.getDate());
+console.log(fecha.getDate());</code></pre></td><td><pre><code class="language-">.getDate():
+2
+2</code></pre></td></tr><tr><td colspan="2">Para .getDay() devuelve en tres letras el día de la semana en número desde el lunes</td></tr><tr><td><pre><code class="language-javascript">console.log('.getDate():');
+console.log(ahora.getDate());
+console.log(fecha.getDate());
+console.log(' ');</code></pre></td><td><pre><code class="language-javascript">.getDay():
+4
+5</code></pre></td></tr><tr><td colspan="2">Para .getFullYear() nos muestra el año completo</td></tr><tr><td><pre><code class="language-javascript">console.log('.getFullYear():');
+console.log(ahora.getFullYear());
+console.log(fecha.getFullYear());
+console.log(' ');</code></pre></td><td><pre><code class="language-">.getFullYear():
+2024
+1983</code></pre></td></tr></tbody></table>
+
+Podremos ir buscando en la documentación todos los metodos de .get...();
+
+### Cambiar datos .set...();
+
+Al igual que el metodo .get...() podemos cambiar los datos de una fecha (objeto) con cada uno de los métodos que empiezan con .get..().
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('.setFullYear():');
+ahora.setFullYear(2020);
+fecha.setFullYear(1985);
+console.log(ahora);
+console.log(fecha);</code></pre></td><td><pre><code class="language-">.setFullYear():
+Sat May 02 2020 20:44:24 GMT+0200
+Mon Dec 02 1985 01:30:00 GMT+0100</code></pre></td></tr></tbody></table>

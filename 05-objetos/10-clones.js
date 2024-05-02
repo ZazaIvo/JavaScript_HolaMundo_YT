@@ -1,4 +1,6 @@
-console.log('Clonado de Objetos');
+console.log('Tema: CLONADO OBJETOS');
+console.log(' ');
+
 // Variable Objeto
 let punto3D = { z: 5 };
 let punto = {
