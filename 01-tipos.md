@@ -1,3 +1,9 @@
+# Curso de Google
+
+Toda la documentación está desarrollada por un curso de Google para completar las clases de este curso:
+
+[https://web.dev/learn/javascript/welcome?hl=es-419](https://web.dev/learn/javascript/welcome?hl=es-419)
+
 # Tipos de variables
 
 Para definir variables debemos utilizar la palabra reservada let o var. Para empezar usaremos let.
