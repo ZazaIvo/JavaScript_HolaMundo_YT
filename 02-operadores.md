@@ -302,7 +302,7 @@ let nombre = '';
 
 let userName= nombre || 'Anonimo';
 
-Como en este caso el nombre es un string vacio será falso y devuelve el valor verdadero que es un string 'Anonimo' pero si tubieva un valor nombre nos devueve este. Probamos y vemos por consola:
+Como en este caso _**el nombre es un string vacio será falso**_ y devuelve el valor verdadero que es un string 'Anonimo' pero si tubieva un valor nombre nos devueve este. Probamos y vemos por consola:
 
 <table><tbody><tr><td>Lógica</td><td>Resultado</td></tr><tr><td><pre><code class="language-javascript">let nombre = '';
 let userName= nombre || 'Anonimo';

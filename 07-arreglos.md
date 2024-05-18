@@ -159,8 +159,7 @@ if(indexFin &gt; 0){
 } else {
     console.log('No existe');
 };</code></pre></td><td><pre><code class="language-">El primer indice de " 1 " es: 0
-
-</code></pre><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p><code>El último indice de " 1 " es: 9</code></p></td></tr></tbody></table>
+El último indice de " 1 " es: 9</code></pre></td></tr></tbody></table>
 
 ### Método .includes() - Boolean
 
@@ -786,9 +785,11 @@ Asi vemos que podemos encadenar, la sintaxis es apretendo Enter sin espacios ent
 
 ## Método .reduce()
 
-Este método recibe un arreglo y una funcion flecha que parametriza en un acumulador "acc" que es el primer parámetro y luego el elemento que está iterando "el". Pasará por todos los elementos y por cada uno ejecuta una función flecha que el retorno de esta función la guarda en el acumulador. Tambien como parárametro además de la función flecha un valor inicial del cumulador.
+Este método recibe un arreglo y una funcion flecha que parametriza en un acumulador "acc" que es el primer parámetro y luego el elemento que está iterando "el". Pasará por todos los elementos y por cada uno ejecuta una función flecha que el retorno de esta función la guarda en el acumulador. También como parárametro además de la función flecha un valor inicial del cumulador. Para cada iteración debe recibir o retornar el acumulador.
 
-const recudeArray = array.reduce( (acc, el) => {} , inicio);
+```javascript
+const recudeArray = array.reduce((acc, el) => {}, inicio);
+```
 
 Veremos en un ejemplo de un arreglo de números que los suamamos a todos.
 

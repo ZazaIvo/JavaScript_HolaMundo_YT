@@ -618,3 +618,71 @@ Para número:  10
   1, 2, 3, 4,  5,
   6, 7, 8, 9, 10
 ]</code></pre></td></tr></tbody></table>
+
+# Ejercicios Operador Ternario
+
+## Ejercicio 11
+
+Los operadores ternarios vimos que es un resumen de un if(){} para no usar tambien el else{}. Donde si una condición es verdadera ejecuta una expresión y si la expresión es falsa ejecuta otra expresión.
+
+```javascript
+// condición ? "expr p/verdadero" : "expr p/falso";
+```
+
+### Elegir bebida
+
+Para el caso que debemos servir si es emenor de edad o mayor de edad en las bebidas podemos usar el if(){} con el else{} o el caso de operador ternario.
+
+```javascript
+// Seleccionar bebida.
+console.log("Ejecicio tragos");
+const edad = 20;
+let bebida;
+```
+
+<table><tbody><tr><td><pre><code class="language-javascript">function selectBebida (edad){
+    if (edad &lt; 18){
+        return 'Jugo';
+    } else{
+        return 'Cerveza';
+    };
+};
+bebida = selectBebida(edad);
+console.log('Con if()');
+console.log('Para',edad,'años, servir:',bebida);
+console.log(' ');</code></pre></td><td><pre><code class="language-">Con if()
+Para 20 años, servir: Cerveza</code></pre></td></tr><tr><td><pre><code class="language-javascript">console.log('Con ternario');
+bebida = edad &lt; 18? 'Jugo' : 'Cerveza';
+console.log('Para',edad,'años, servir:',bebida);
+console.log(' ');</code></pre></td><td><pre><code class="language-">Con ternario
+Para 20 años, servir: Cerveza</code></pre></td></tr></tbody></table>
+
+Vemos que llegamos el mismo resultado pero con mucho menos código usando operador ternario "?"
+
+### Consultar si es miembro
+
+En el caso de un usuario que si es miembro paga menos "2" y si no es miembro paga "10" veremos la diferencia de usar ternario o if()
+
+Con If(){} else {}:
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('Con if()');
+function getMember(usrs) {
+    if(usrs.isMember){
+        return 2;
+    } else {
+        return 10;
+    };
+};
+let bay = getMember(users);
+console.log('Cobrar:',bay);</code></pre></td><td><pre><code class="language-">Con if()
+Cobrar: 2</code></pre></td></tr></tbody></table>
+
+Con ternario:
+
+<table><tbody><tr><td><pre><code class="language-javascript">console.log('Con ternario');
+bay = users.isMember ? 2 : 10;
+console.log('Cobrar:',bay);
+console.log(' ');</code></pre></td><td><pre><code class="language-">Con ternario
+Cobrar: 2</code></pre></td></tr></tbody></table>
+
+Siendo muy significativa la cantidad de lineas de codigo de diferencia.
